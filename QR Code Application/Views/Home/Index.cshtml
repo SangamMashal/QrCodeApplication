@@ -1,0 +1,31 @@
+﻿<script type="text/javascript">
+        function GetQRImage() {
+            var txt = $('.qrtext').val();
+            window.open("http://localhost/QRCode/api/QrCodeApi?size=150*150" + "&qrCodeText=" + txt, "_self");
+        }
+</script>
+<div class="jumbotron" style="margin-top:25px;">
+        <input type="text" class="form-control qrtext" placeholder="Enter text for QR code" style="margin-bottom:20px;" />
+        <input type="button" onclick="javascript:GetQRImage();" value="Get QR Code" class="btn btn-success" />
+</div>
+
+<div class="jumbotron" style="margin-top:25px;">
+    @using (Html.BeginForm("Index",
+                            "Home",
+                            FormMethod.Post,
+                            new { enctype = "multipart/form-data" }))
+    {
+        <p>Choose QR code image to read/scan:</p>
+        <input type="file" name="file" id="file" />
+        <br>
+        <br>
+        <input type="hidden" name="MAX_FILE_SIZE" value="1048576" class="btn btn-primary" />
+        <input type="submit" value="Read QR Code" class="btn btn-success" />
+
+        <br>
+        <br>
+
+        <p>Scanned Message:<span style="color:darkgreen"> @ViewBag.Message</span></p>
+    }
+   
+</div>
